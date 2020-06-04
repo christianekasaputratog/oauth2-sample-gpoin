@@ -1,0 +1,21 @@
+<html>
+<body>
+<div>
+	<p>Dear Client</p>
+	<p>This is an e-mail notification from GVM Poin confirming that you propose to become GVM API User :</p>
+	<p>
+		To <span class="il">activate</span> your account, please click on 
+	</p>
+	<form method="get" action="http://localhost/form/activation" target="_blank" onsubmit="try {return window.confirm(&quot;You are submitting information to an external page.\nAre you sure?&quot;);} catch (e) {return false;}">
+		<input type="hidden" name="property" value="%s">
+		<input type="hidden" name="magic" value="%s">
+		<input type="submit" value="This Button">
+	</form>
+	<p></p>
+	<p>If you did not make this application, then please ignore this message.</p>
+	<p>Warm regards.</p>
+	<p>GVM Team</p>
+	<br>
+</div>
+</body>
+</html>

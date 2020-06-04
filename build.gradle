@@ -1,0 +1,279 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath(
+                'org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE',
+                'org.unbroken-dome.gradle-plugins:gradle-testsets-plugin:1.2.0',
+                'org.flywaydb:flyway-gradle-plugin:4.0.1',
+                'com.h2database:h2:1.4.191',
+                'de.aaschmid.gradle.plugins:gradle-cpd-plugin:0.1')
+        classpath 'de.thetaphi:forbiddenapis:2.2'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
+        classpath 'org.owasp:dependency-check-gradle:1.4.3'
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.unbroken-dome.test-sets'
+apply plugin: 'org.flywaydb.flyway'
+apply plugin: 'spring-boot'
+apply plugin: 'io.spring.dependency-management'
+
+// code checking
+apply plugin: 'findbugs'
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'jdepend'
+apply plugin: 'cpd'
+apply plugin: 'jacoco'
+// end code checking
+
+flyway {
+    url = 'jdbc:h2:file:./gvm/ps'
+    user = 'sa'
+}
+
+springBoot {
+    executable = true
+}
+
+//hot reload static file
+task pathingJar(type: Jar) {
+    dependsOn configurations.runtime
+    appendix = 'pathing'
+
+    doFirst {
+        manifest {
+            attributes "Class-Path": configurations.runtime.files.collect {
+                it.toURL().toString().replaceFirst(/file:\/+/, '/')
+            }.join(' ')
+        }
+    }
+}
+
+bootRun {
+    dependsOn pathingJar
+    doFirst {
+        classpath = files("$buildDir/classes/main", "$buildDir/resources/main", pathingJar.archivePath)
+    }
+    addResources = true
+    if (System.getProperty('DEBUG', 'false') == 'true') {
+        jvmArgs '-Xdebug',
+                '-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=9009'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+configurations.all {
+    exclude group: "commons-logging", module: "commons-logging"
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-mail')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-devtools')
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+    compile('org.springframework.cloud:spring-cloud-starter-eureka')
+	compile('org.springframework.security.oauth:spring-security-oauth2')
+    compile('org.springframework.data:spring-data-redis')
+	compile('org.springframework:spring-jdbc')
+	compile('org.postgresql:postgresql:9.4.1212')
+	compile('org.apache.commons:commons-lang3:3.4')
+    compile('org.apache.httpcomponents:httpclient')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE')
+	compile('com.google.guava:guava:18.0')
+	compile('com.zaxxer:HikariCP:2.4.7')
+	compile('net.sourceforge.nekohtml:nekohtml:1.9.22')
+	compile('org.springframework.boot:spring-boot-configuration-processor:1.3.3.RELEASE')
+	compile('commons-configuration:commons-configuration:1.10')
+    compile('commons-validator:commons-validator:1.6')
+    compile('commons-io:commons-io:2.5')
+	compile('org.apache.poi:poi:3.14')
+	compile('org.apache.poi:poi-ooxml:3.14')
+	compile('org.modelmapper:modelmapper:0.7.5')
+    compile('com.google.code.gson:gson:2.8.0')
+    compile('org.projectlombok:lombok:1.16.10')
+    compile('org.slf4j:jcl-over-slf4j:1.7.21')
+    compile('ch.qos.logback:logback-classic:1.1.7')
+    compile('org.quartz-scheduler:quartz:2.2.3')
+    compile('org.quartz-scheduler:quartz-jobs:2.2.3')
+    compile('joda-time:joda-time:2.9.9')
+    compile('redis.clients:jedis:2.9.0')
+    compile('org.springframework.session:spring-session-jdbc:1.3.1.RELEASE')
+    compile('org.apache.commons:commons-csv:1.4')
+    compile('com.amazonaws:aws-java-sdk-s3')
+    compile group: 'javax.interceptor', name: 'javax.interceptor-api', version: '1.2.1'
+
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.7.4'
+    testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.7.4'
+    testCompile group: 'org.powermock', name: 'powermock-core', version: '1.7.4'
+
+    testCompile('org.assertj:assertj-core:3.4.0')
+	testCompile('org.hsqldb:hsqldb:2.2.9')
+	testCompile('org.dbunit:dbunit:2.5.2')
+	cpd('pmd:pmd:4.2.5')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Dalston.RELEASE"
+        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.228'
+    }
+}
+
+ext['hibernate.version'] = '4.3.11.Final' // avoid many errors when use hibernate 5 in spring boot 1.4
+
+jar {
+    baseName = 'gvm-poin'
+    version =  '0.1.0'
+}
+
+eclipse {
+    classpath {
+        containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+        containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
+}
+
+// code checking
+task createQualityReport {
+	dependsOn checkstyleMain, checkstyleTest
+    dependsOn findbugsMain, findbugsTest
+    dependsOn pmdMain, pmdTest
+    dependsOn jdependMain, jdependTest
+    dependsOn tasks.cpd
+    dependsOn jacocoTestReport
+}
+
+gradle.taskGraph.whenReady {taskGraph ->
+    if (!taskGraph.hasTask(createQualityReport)) {
+         tasks.withType(Checkstyle) {
+            enabled = true
+        }
+
+        tasks.withType(FindBugs) {
+            enabled = true
+        }
+
+        tasks.withType(Pmd) {
+            enabled = true
+        }
+
+        tasks.withType(JDepend) {
+            enabled = true
+        }
+
+        tasks.cpd.enabled = true
+
+    }
+}
+
+checkstyle {
+	// tool version : 6.1.1
+	// source : https://raw.githubusercontent.com/checkstyle/checkstyle/checkstyle-6.1.1/google_checks.xml
+    configFile = file("${project.rootDir}/config/checkstyle/google_checks.xml")
+    toolVersion = '6.1.1'
+}
+
+findbugs {
+    ignoreFailures = true
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+pmd {
+    ignoreFailures = true
+}
+// JDEPEND
+jdepend {
+   //toolVersion = "2.9.1"
+   sourceSets = [sourceSets.main]
+   ignoreFailures = true
+}
+
+jdependMain {
+   reports {
+      xml.enabled true
+      text.enabled false
+   }
+}
+
+task jdependReport(
+	dependsOn: jdependMain, 
+	group: 'verification', 
+	description: 'Generates a HTML report after executing jdepend checks.') {
+
+   doLast {
+       ant.xslt(
+               in: "$reporting.baseDir/jdepend/main.xml",
+
+               // source : https://raw.githubusercontent.com/azagniotov/stubby4j/master/conf/jdepend/jdepend-report.xslt
+               style: "$rootDir/config/jdepend/jdepend-report.xslt",
+               out: "$reporting.baseDir/jdepend/main.html")
+   }
+
+}
+
+check {
+   dependsOn += ['jdependReport']
+}
+// END JDEPEND
+
+tasks.cpd {
+    reports {
+        text.enabled = true
+        xml.enabled = false
+    }
+
+    source = 'src/main/java'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/reports/coverage"
+    }
+}
+
+jacocoTestReport.dependsOn test
+// end code checking
+
+
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+}
+
+javadoc {
+    source = sourceSets.main.allJava
+    classpath = configurations.compile
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-Poin Email Confirmation</title>
+    <style type="text/css">
+            @media (max-width: 425px) {
+                .partners img{
+                    width: 75px !important;
+                }
+            }
+        </style>
+</head>
+<body bgcolor="#ccc">
+<table id="root" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 600px; border-radius: 10px; margin: auto; font-family: arial;">
+    <tr>
+        <td>
+            <table id="sub-table" cellspacing="0" border="0" style="width: 100%; text-align: left; padding: 25px 0 25px 0;">
+                <tr>
+                    <td>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="padding-bottom: 20px; padding-left: 25px;"><img style="width: 55px; float: right; padding-right: 30px;" src="http://poinsystem.s3.amazonaws.com/email/GPOIN_logo-27.jpg"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0 25px 0 25px;">
+                                    <div style="font-size: 25px; font-weight: bold; padding-bottom: 5px;">#SUBJECT_HEADER#</div>
+                                    <div style="padding-bottom: 10px;">#HEADER_DESCRIPTION#</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0 25px 0 25px;">
+                                    <table width="100%" cellspacing="0" >
+                                        <tr style="text-align: center; background-color: #4c4d4d;">
+                                            <td colspan="2" style="color: white; padding: 10px; font-size: 14px;">ORDER ##PURCHASE_CODE#</td>
+                                        </tr>
+                                        <tr >
+                                            <td>
+                                                <table cellspacing="" style="background-color: #cccccc52; width: 100%; padding: 10px 0 10px 15px;">
+                                                    <tr>
+                                                        <td valign="top" style="color: #95989A; font-size: 13px;">Reward</td>
+                                                        <td colspan="3" style="padding-left: 10px;">
+                                                            <div style="background: url(#REWARD_IMAGE#)right bottom 0px/75px 75px; background-repeat: no-repeat; background-size: cover; width: 75px; height: 75px;">
+                                                            </div>
+                                                            <div style="padding-top: 10px;">
+                                                                <div style="font-weight: bold; font-size: 14px;">#REWARD_TITLE# </div>
+                                                                <div>
+                                                                    <table cellspacing="0">
+                                                                        <tr>
+                                                                            <td style="font-size: 14px;">#REWARD_POINT_COST#</td>
+                                                                            <td style="background: url(http://poinsystem.s3.amazonaws.com/email/icon-poin.png) left bottom 3px/15px 15px no-repeat; width: 20px; height: 20px;"></td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                                <div style="font-size: 12px; float: left; padding: 3px 0 10px 0">#REDEMPTION_DATETIME#</div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="color: #95989A; font-size: 13px; padding-bottom: 10px;">Nama</td>
+                                                        <td colspan="3" style="padding: 0 10px 10px 10px; font-size: 16px; font-weight: bold;">
+                                                            #GPOIN_MEMBER_NAME#
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="color: #95989A; font-size: 13px; width: 75px; padding-bottom: 10px;">GPoin Number</td>
+                                                        <td colspan="3" style="padding-left: 10px; font-size: 14px; font-weight: bold; vertical-align: top;">
+                                                            #GPOIN_MEMBER_PSID#
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="color: #95989A; font-size: 13px; width: 75px;">Email</td>
+                                                        <td colspan="3" style="padding: 0 10px 0 10px; font-size: 14px; font-weight: bold;">
+                                                            #GPOIN_MEMBER_EMAIL#
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <hr style="color: #95989A">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="color: #95989A; font-size: 13px; padding-bottom: 10px;">Penerima</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="color: #95989A; font-size: 13px; padding-bottom: 10px;">Nama</td>
+                                                        <td colspan="3" style="padding: 0 10px 10px 10px; font-size: 16px; font-weight: bold;">
+                                                            #RECIPIENT_NAME#
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="color: #95989A; font-size: 13px; padding-bottom: 10px;">Telepon</td>
+                                                        <td colspan="3" style="padding: 0 10px 10px 10px; font-size: 14px; font-weight: bold;">
+                                                            #RECIPIENT_PHONE#
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" style="color: #95989A; font-size: 13px;">Alamat</td>
+                                                        <td colspan="3" style="font-size: 14px; font-weight: bold; padding: 0 0 10px 10px">
+                                                            #RECIPIENT_ADDRESS#
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" style="color: #95989A; font-size: 13px;">Kota</td>
+                                                        <td colspan="3" style="font-size: 14px; font-weight: bold; padding: 0 0 10px 10px">
+                                                            #RECIPIENT_CITY#
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" style="color: #95989A; font-size: 13px;">Kode Pos</td>
+                                                        <td colspan="3" style="font-size: 14px; font-weight: bold; padding: 0 0 10px 10px">
+                                                            #RECIPIENT_POST_CODE#
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" style="color: #95989A; font-size: 13px;">Keterangan</td>
+                                                        <td colspan="3" style="font-size: 14px; font-weight: bold; padding: 0 0 10px 10px">
+                                                            #ADDITIONAL_INFO#
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" style="color: #95989A; font-size: 13px;">Facebook Account</td>
+                                                        <td colspan="3" style="font-size: 14px; font-weight: bold; padding: 0 0 10px 10px">
+                                                            #FACEBOOK_ACCOUNT#
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" style="color: #95989A; font-size: 13px;">Instagram Account</td>
+                                                        <td colspan="3" style="font-size: 14px; font-weight: bold; padding: 0 0 10px 10px">
+                                                            #INSTAGRAM_ACCOUNT#
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top" style="color: #95989A; font-size: 13px;">Twitter Account</td>
+                                                        <td colspan="3" style="font-size: 14px; font-weight: bold; padding: 0 0 10px 10px">
+                                                            #TWITTER_ACCOUNT#
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 20px 25px 0 25px;">#FOOTNOTE_DESCRIPTION#</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 20px 0 0px 15px;">
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <td>
+                                                <table style="width: 100%; margin: -15px 0 -10px 0;" cellpadding="5" >
+                                                    <tr>
+                                                        <td>
+                                                            <div style="color: #95989A; font-size: 10px;">CONTACT</div>
+                                                            <a style="font-size: 11px;">hello@gpoin.com</a>
+                                                            <div></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div style="color: #95989A; font-size: 10px; padding: 5px 0 5px 0;">OUR PARTNERS</div>
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        <img style="width: 90px; padding-right: 10px;" src="http://poinsystem.s3.amazonaws.com/email/logo%20WT.png">
+                                                                    </td>
+                                                                    <td>
+                                                                        <img style="width: 90px; " src="http://poinsystem.s3.amazonaws.com/email/logo%20bolalob.png">
+                                                                    </td>
+                                                                    <td>
+                                                                        <img style="padding-left: 10px;" src="http://poinsystem.s3.amazonaws.com/email/logo+historia.png">
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

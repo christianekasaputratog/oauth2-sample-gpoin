@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+# export server1=52.220.25.204
+# export server2=52.220.41.159
+
+# Functions definition
+get_pid(){
+    s=$(ps axf | grep gvm-poin-0.1.0.jar | grep -v grep | awk {'print $1'})
+    if [ "$s" ] ; then
+        return $s
+    fi
+    # In any another case, return 0
+    return 0
+}
+
+# Build
+# ./gradlew clean build -x test
+
+# Export env vars
+export POIN_ACTIVE_PROFILE='sandbox'
+
+export POIN_SANDBOX_DB_HOST='10.3.4.11'
+export POIN_SANDBOX_DB_USERNAME='postgres'
+export POIN_SANDBOX_DB_PASSWORD='postgres'
+export POIN_SANDBOX_DB_NAME='poin_staging_db'
+export POIN_SANDBOX_WT_AUTH_URL='http://103.29.149.248/oauth/token'
+export POIN_SANDBOX_WT_ACCESS_KEY='talk-ps-app'
+export POIN_SANDBOX_WT_SECRET_KEY='22303212'
+export POIN_SANDBOX_BOLALOB_AUTH=''
+export POIN_SANDBOX_BOLALOB_ACCESS_KEY=''
+export POIN_SANDBOX_BOLALOB_SECRET_KEY=''
+export POIN_SANDBOX_OPINI_AUTH=''
+export POIN_SANDBOX_OPINI_ACCESS_KEY=''
+export POIN_SANDBOX_OPINI_SECRET_KEY=''
+export POIN_SANDBOX_RECAPTCHA_SITE_KEY='6Leiqx0UAAAAACjk1yvnrmCKRuu0ITuWmH_MhM3m'
+export POIN_SANDBOX_RECAPTCHA_SECRET_KEY='6Leiqx0UAAAAAOd0_FIq3lQEO3iKeHkN9-mHflbi'
+
+export POIN_SES_ACCESS_KEY='AKIAIO3MH3C7IRFFNKEA'
+export POIN_SES_SECRET_KEY='Am5D+uDLGRm+p70mDPw0o7rDioqbySnGi9JhHRHGN7S4'
+
+export POIN_MAIL_USERNAME='poin.sistem@gmail.com'
+export POIN_MAIL_PASSWORD='!@#qweasdzxc'
+export POIN_EMAIL_VERIFICATION_SUBJECT='Please verify your email address'
+
+export POIN_SANDBOX_BASE_URL='http://103.29.149.251'
+
+export REDIS_SANDBOX_HOST='10.3.4.14'
+export REDIS_SANDBOX_PORT='6379'
+
+export EUREKA_SANDBOX_HOST='10.3.4.15'
+export EUREKA_SANDBOX_POST='8761'
+
+export POIN_SANDBOX_SEPULSA_API_URL='https://gaharu-uat.sepulsa.id/api/v1'
+export POIN_SANDBOX_SEPULSA_KEY='jALanjALanSoreZz'
+export POIN_SANDBOX_SEPULSA_PARTNER_ID='420'
+# Stop
+ps axf | grep gvm-poin-0.1.0.jar | grep -v grep | awk '{print "kill " $1}' | sh
+sleep 3
+
+# Wait
+pid=1
+while [ "$pid" -ne 0 ]; do
+  sleep 1
+  get_pid
+  pid=$?
+done
+
+# Start
+sudo -E java -jar /home/developer/Poin-Core/Poin-Core/build/libs/gvm-poin-0.1.0.jar &

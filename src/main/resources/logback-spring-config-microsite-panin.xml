@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+
+    <logger name="org.gvm.product.gvmpoin.module.microsite.PaninMicrositeService" additivity="false">
+        <level value="INFO" />
+        <appender-ref ref="MICROSITE_PANIN_FILE" />
+    </logger>
+
+</included>

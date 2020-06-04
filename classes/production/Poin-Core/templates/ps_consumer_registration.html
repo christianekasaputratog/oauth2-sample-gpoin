@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>User Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/css/form-oauth.css" rel="stylesheet">
+    <script src="/js/modernizr.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
+</head>
+<body class="eternity-form">
+<section class="colorBg active">
+    <div class="container">
+        <div class="login-form-section">
+            <div class="login-content">
+                <form action="#" th:action="@{/registration}" th:object="${consumer}" method="post" class="form-signin">
+                    <div class="section-title">
+                        <h3>Get your account here</h3>
+                    </div>
+                    <div class="textbox-wrap focused">
+                        <div class="input-group">
+                            <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
+                            <input type="text" th:field="*{name}" placeholder="Full Name" class="form-control">
+                        </div>
+                        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                    </div>
+                    <div class="textbox-wrap">
+                        <div class="input-group">
+                            <span class="input-group-addon "><i class="icon-envelope icon-color"></i></span>
+                            <input type="email" th:field="*{email}" placeholder="Email" class="form-control" required="required">
+                        </div>
+                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                    </div>
+                    <div class="textbox-wrap">
+                        <div class="input-group">
+                            <span class="input-group-addon "><i class="icon-key icon-color"></i></span>
+                            <input type="password" autocomplete="off" id="password" th:field="*{password}" placeholder="Password" class="form-control" required="required">
+                            <div class="password-input-meter">
+                                <div class="password-input-dot"></div>
+                                <div class="password-input-dot"></div>
+                                <div class="password-input-dot"></div>
+                                <div class="password-input-dot"></div>
+                            </div>
+                        </div>
+                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                    </div>
+                    <div class="textbox-wrap">
+                        <div class="input-group">
+                            <span class="input-group-addon "><i class="icon-key icon-color"></i></span>
+                            <input type="password" autocomplete="off" th:field="*{passwordConfirmation}" placeholder="Password Confirmation" class="form-control" required="required">
+                        </div>
+                        <div th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}"></div>
+                    </div>
+                    <div class="button-login-register-wrap clearfix">
+                        <a th:href="@{/login}" class="btn btn-success pull-left blue-btn">
+                            <i class="icon-chevron-left"></i>&nbsp; &nbsp;Back to login
+                        </a>
+                        <button type="submit" class="btn btn-success pull-right green-btn btn-submit">Register now &nbsp; <i class="icon-chevron-right"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/js/jquery-1.9.1.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/respond.src.js"></script>
+<script src="/js/jquery.icheck.js"></script>
+<script src="/js/placeholders.min.js"></script>
+<script src="/js/waypoints.min.js"></script>
+<script src="/js/poin.password.strength.checker.js?v=1.1"></script>
+<script type="text/javascript">
+    $(function () {
+        $("input").iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            increaseArea: '20%' // optional
+        });
+
+        $(".dark input").iCheck({
+            checkboxClass: 'icheckbox_polaris',
+            increaseArea: '20%' // optional
+        });
+
+        $(".form-control").focus(function () {
+            $(this).closest(".textbox-wrap").addClass("focused");
+        }).blur(function () {
+            $(this).closest(".textbox-wrap").removeClass("focused");
+        });
+
+    });
+</script>
+</body>

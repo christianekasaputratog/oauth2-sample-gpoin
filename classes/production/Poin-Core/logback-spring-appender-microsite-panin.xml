@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<appender name="MICROSITE_PANIN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="org.gvm.product.gvmpoin.module.microsite.MicrositeDataLoggingEventFilter" />
+    <File>logs/microsite/panin.log</File>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <!-- daily rollover -->
+        <FileNamePattern>logs/microsite/panin.%d{yyyy-MM-dd}.%i.log.gz</FileNamePattern>
+        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <!-- or whenever the file size reaches 50MB -->
+            <maxFileSize>50MB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+
+    <encoder>
+        <Pattern>%d{yyyy-MM-dd|HH:mm:ss}|%msg %n</Pattern>
+    </encoder>
+</appender>

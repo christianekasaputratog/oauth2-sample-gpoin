@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+
+    <logger name="org.gvm.product.gvmpoin" additivity="false">
+        <level value="INFO" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DAILY_ACCESS_FILE" />
+        <appender-ref ref="DAILY_ERROR_FILE" />
+    </logger>
+
+    <logger name="org.springframework.security" additivity="false">
+        <level value="INFO" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DAILY_ACCESS_FILE" />
+    </logger>
+
+    <logger name="org.springframework.security" additivity="false">
+        <level value="ERROR" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DAILY_ERROR_FILE" />
+    </logger>
+
+    <logger name="org.springframework.web" additivity="false">
+        <level value="INFO" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DAILY_ACCESS_FILE" />
+    </logger>
+
+    <logger name="org.springframework.web" additivity="false">
+        <level value="ERROR" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DAILY_ERROR_FILE" />
+    </logger>
+
+</included>
